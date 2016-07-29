@@ -1,0 +1,19 @@
+<form class="form-inline" role="form" name = "forms" data-ng-submit="addCalls()">
+	<fieldset>
+		<legend>Add call</legend>
+		
+		<input name="name" placeholder="Name" name="name" data-ng-model="todoName" ng-maxlength="5">
+		<input name="phones" type="text" placeholder="Phone number" data-ng-model="todoPhone" >				 
+		<input type="time" ng-model="todoTime" placeholder="time" min="00:00" max="23:00" />
+		 
+		<button class="btn btn-primary" type="submit" value="Submit">Add +</button>
+		<button class="btn btn-primary" type="reset"  value="Reset" ng-click="cancelAdd()">Cancel</button>
+		<br><br>
+		<div class="alert alert-danger" role="alert" class="error" ng-show="forms.name.$error.maxlength">Too long! max. of 5 characters!</div>
+		<span class="alert alert-danger" class="error" ng-show="forms.phones.$error.format">Some error! Please see phone number validation below!</span>	
+	</fieldset>
+	<h4>Phone number validation</h4>
+	<p>Phone number validation each phone number should start with '+', or '00' string followed by digit characters or characters '(', ')', ''.
+       Characters '(',')' and '' can be used just once and should be just on position 2 to 8 in the string.</p>
+</form>
+

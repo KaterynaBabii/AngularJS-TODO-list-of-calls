@@ -5,7 +5,7 @@
     <script data-require="angularjs@1.5.0" data-semver="1.5.0" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.2/angular.js"></script>
     
     <!--My style-->
-    <!-- <link href="css/style.css" rel="stylesheet" /> -->
+     <link href="css/style.css" rel="stylesheet" /> 
     <script src="js/script.js"></script>
      
      <!--Bootstrap-->
@@ -20,12 +20,18 @@
         <div class="row">
           <add-call></add-call><br><br><br>
 
-    <table class="table table-striped">
+    <table class="table table-striped table-bordered">
         <thead>
           <tr>
-            <th ng-click="sort('name')">Name</th>
+            <th>Name
+                <a href="#" ng-click="sort('-name')" class="glyphicon glyphicon-triangle-bottom"></a>
+                <a href="#" ng-click="sort('name')"  class="glyphicon glyphicon-triangle-top"></a>
+             </th>
             <th>Phone number</th>
-            <th ng-click="sort('time')">Time</th>
+            <th>Time
+                <span ng-click="sort('-time')" class="glyphicon glyphicon-triangle-bottom"></span>
+                <span ng-click="sort('time')"  class="glyphicon glyphicon-triangle-top"></span>
+            </th>
             <th></th>
             <th><!-- <a href="#" data-ng-click="removeMulItem()">Remove {{remaining}} calls</a> --></th>
           </tr>
@@ -35,7 +41,8 @@
             <!--<input type="checkbox" ng-model="todo.done">
             <span class="done-{{todo.done}}" ng-hide="editing">{{todo.text}}</span>-->
        
-            <td> <a  class="done-{{ todo.done }}">{{ todo.name }}</a></td>
+            <td class="done-{{ todo.done }}">{{ todo.name }}</td>
+              
             <td>{{todo.phone}}</td>
             <td>{{todo.time | date:'HH:mm'}}</td>
             <td><a href="#" ng-click="removeCall($index)" >delete</a></td>
@@ -44,19 +51,15 @@
         </tbody>
         
       </table>
-      <button data-ng-click="allCalls()">All</button>
-      <button data-ng-click="nextCall()">Next</button>
-      <button  data-ng-click="disabledCall()">Finished</button>
+      <button class="btn btn-primary" data-ng-click="allCalls()">All</button>
+      <button class="btn btn-primary" data-ng-click="nextCall()">Next</button>
+      <button class="btn btn-primary" data-ng-click="disabledCall()">Finished</button>
       
       <br><br><br>
-      <next-call ng-show="nextCallIs"></next-call>
+      <next-call data-ng-init="nextCall()"></next-call> 
+      <!--ng-show="nextCallIs"-->
       <!-- ng-show="nextCall"  -->
-      
-      <!--Time-->
-        <!--<p> Current time is: {{currTime}}</p>
-        <p>Today day is: {{date}}</p>-->
-      <!--End Time-->
-      
+         
      </div> 
     <!--End controller-->
     </div>
