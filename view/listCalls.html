@@ -7,11 +7,13 @@
                 <th>Name
                     <a href="#" ng-click="sort('-name')" class="glyphicon glyphicon-triangle-bottom"></a>
                     <a href="#" ng-click="sort('name')"  class="glyphicon glyphicon-triangle-top"></a>
+                    <!-- its better for user to click on Name and toogle sort order, so please move this logick-->
                     </th>
                 <th>Phone number</th>
                 <th>Time
                     <a href="#" ng-click="sort('-time')" class="glyphicon glyphicon-triangle-bottom"></a>
                     <a href="#" ng-click="sort('time')"  class="glyphicon glyphicon-triangle-top"></a>
+                    <!--same as for name header-->
                 </th>
                 <th></th>
                 <th></th>
@@ -30,6 +32,6 @@
         <button class="btn btn-primary" data-ng-click="allCalls()">All</button>
         <button class="btn btn-primary" data-ng-click="nextCall()">Next</button>
         <button class="btn btn-primary" data-ng-click="disabledCall()">Finished</button>
-        <br><br><br>
+        <br><br><br> <!--please avoid use br for margin, you should do it by css-->    
 	</div>
 </div>

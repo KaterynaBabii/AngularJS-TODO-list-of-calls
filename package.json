@@ -1,6 +1,8 @@
 {
   "devDependencies": {
     "@eleks/eslint-config-eleks": "^0.1.1",
-    "eslint": "^3.1.1"
+    "eslint": "^3.1.1",
+    "eslint-config-angular": "^0.5.0",
+    "eslint-plugin-angular": "^1.0.1"
   }
 }
