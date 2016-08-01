@@ -7,6 +7,7 @@
 				<input name="name" placeholder="Name" name="name" data-ng-model="todoName" ng-maxlength="5">
 				<input name="phones" type="text" placeholder="Phone number" data-ng-model="todoPhone" >				 
 				<input type="time" ng-model="todoTime" placeholder="time" min="00:00" max="24:00" />
+				<!--please change markup to support bootstrap validation http://getbootstrap.com/css/#forms-control-validation-->
 				
 				<button class="btn btn-primary" type="submit" value="Submit">Add +</button>
 				<button class="btn btn-primary" type="reset"  value="Reset" ng-click="cancelAdd()">Cancel</button>
@@ -17,6 +18,8 @@
 			<h4>Phone number validation</h4>
 			<p>Phone number validation each phone number should start with '+', or '00' string followed by digit characters or characters '(', ')', ''.
 			Characters '(',')' and '' can be used just once and should be just on position 2 to 8 in the string. Display format of phone number 00XXX XXX XXX</p>
+			<!--Remove this message and show short validation message for each field only when form submited with wrond data. 
+			For examle if i typed text symbol in time field i should see validation message: - wrong time format, correct is HH:MM-->
 		</form>
 	</div>
 </div>

@@ -3,7 +3,7 @@
     "env": {
         "browser": true
     },
-    "extends": "@eleks/eleks",
+    "extends": ["@eleks/eleks", "angular"],
     "rules": {
         // enable additional rules
         "indent": [
