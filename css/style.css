@@ -1,4 +1,15 @@
 .glyphicon {
     font-size: 9px;
+    float: right; 
+}
+.glyphicon-triangle-bottom {
+    margin-top: 8px;
 }
 
+.glyphicon-triangle-top {
+    margin-right:-9px;  
+}
+a, a:hover, a:focus {
+    outline: none;
+    color: black;
+}

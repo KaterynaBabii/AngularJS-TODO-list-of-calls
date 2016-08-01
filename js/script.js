@@ -3,13 +3,19 @@ var app = angular.module("myApp", []);
 app.directive("addCall", function () {
     return {
         restrict: "E",
-        templateUrl: "view/creating.html",
+        templateUrl: "view/addCall.html",
     };
 });
 app.directive("nextCall", function () {
     return {
         restrict: "E",
         templateUrl: "view/nextCall.html",
+    };
+});
+app.directive("listCalls", function () {
+    return {
+        restrict: "E",
+        templateUrl: "view/listCalls.html",
     };
 });
 
@@ -21,7 +27,7 @@ app.controller("MyController", ["$scope", "$http", "$filter", function ($scope, 
             phone: "00420 111 222 333",
             time: "12:20",
             done: false,
-        }];
+        },];
 
     localStorage.setItem("todos", JSON.stringify($scope.todos));
 
@@ -31,7 +37,8 @@ app.controller("MyController", ["$scope", "$http", "$filter", function ($scope, 
             $scope.str = $scope.todoPhone.replace(/\s/g, "");
             $scope.hasDuplicates = (/([()-]).*?\1/).test($scope.str);
             $scope.pattern = (/^00|\+[0-9-()]{7}[0-9]*$/).test($scope.str);
-            if (!$scope.hasDuplicates && $scope.pattern) {
+            $scope.hasLetter = (/\[a-zA-z]/).test($scope.str);
+            if (!$scope.hasDuplicates && $scope.pattern && !$scope.hasLetter) {
                 $scope.newstr = $scope.str.replace(/[ ()-]/g, "");
                 $scope.phones = $scope.newstr.replace(/^\+/, "00");
                 $scope.phoneNum = $scope.phones.replace(/([\d]{5})([\d]{3})([\d]{3})([\d]{3})/g, "$1 $2 $3 $4");
