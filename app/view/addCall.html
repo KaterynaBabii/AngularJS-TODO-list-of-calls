@@ -1,0 +1,18 @@
+<form  class = "form-inline" role="form" name = "forms"  data-ng-submit="forms.$valid && addCalls()"> 
+	<!---->
+	<fieldset class="scheduler-border">
+		<legend class="scheduler-border">Add call</legend>
+		
+		<input class="form-control" name="name" placeholder="Name" name="name" data-ng-model="todoName" ng-maxlength="5">
+		<div class="has-error" ng-show="forms.name.$error.maxlength">Too long! max. of 5 characters!</div>
+		
+		<input class="form-control" name="phoneNum" type="text" placeholder="Phone number" data-ng-model="todoPhone" data-ng-change="validFormat()" data-ng-model-options="{updateOn: 'default blur', debounce: { 'default': 500, 'blur': 0 } }">
+		<p  class="has-error"  ng-show="forms.phoneNum.$error.format">Wrong format number.</p>
+						 
+		<input class="form-control" type="time" ng-model="todoTime" placeholder="time" min="00:00" max="24:00" />
+		<button class="btn btn-primary" type="submit" value="Submit">Add +</button>
+</fieldset>
+</form>
+
+
+<!--  -->

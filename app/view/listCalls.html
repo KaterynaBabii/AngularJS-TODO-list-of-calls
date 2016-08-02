@@ -1,0 +1,23 @@
+<table class="table table-striped table-bordered">
+    <thead>
+        <tr>
+        <th  ng-click="sort('name')">Name</th>
+        <th>Phone number</th>
+        <th  ng-click="sort('time')">Time</th>
+        <th></th>
+        <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr data-ng-repeat="todo in todos | orderBy:sortKey:reverse track by $index ">
+        <td class="done-{{ todo.done }}">{{ todo.name }}</td> 
+        <td>{{todo.phone}}</td>
+        <td>{{todo.time | date:'HH:mm'}}</td>
+        <td><a href="#" ng-click="removeCall($index)" >delete</a></td>
+        <td><input type="checkbox" data-ng-model="todo.done"></td>
+        </tr>
+    </tbody> 
+</table>
+<button class="btn btn-primary" data-ng-click="allCalls()">All</button>
+<button class="btn btn-primary" data-ng-click="nextCall()">Next</button>
+<button class="btn btn-primary" data-ng-click="disabledCall()">Finished</button>

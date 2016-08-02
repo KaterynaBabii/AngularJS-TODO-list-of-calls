@@ -1,3 +1,4 @@
+
 var app = angular.module("myApp", []);
 
 app.directive("addCall", function () {
@@ -31,22 +32,25 @@ app.controller("MyController", ["$scope", "$http", "$filter", function ($scope, 
 
     localStorage.setItem("todos", JSON.stringify($scope.todos));
 
-  // Add calls
+    // Add calls
+    $scope.validFormat = function () {
+        $scope.str = $scope.todoPhone.replace(/\s/g, "");
+        $scope.hasDuplicates = (/([()-]).*?\1/).test($scope.str);
+        $scope.pattern = (/^00|\+[0-9-()]{7}[0-9]*$/).test($scope.str);
+        $scope.hasLetter = (/\[a-zA-z]/).test($scope.str);
+        if (!$scope.hasDuplicates && $scope.pattern && !$scope.hasLetter) {
+            $scope.newstr = $scope.str.replace(/[ ()-]/g, "");
+            $scope.phones = $scope.newstr.replace(/^\+/, "00");
+            $scope.phoneNum = $scope.phones.replace(/([\d]{5})([\d]{3})([\d]{3})([\d]{3})/g, "$1 $2 $3 $4");
+            $scope.forms.phoneNum.$setValidity("format", true);
+        } else {
+            $scope.forms.phoneNum.$setValidity("format", false);
+            return;
+        }
+    };
     $scope.addCalls = function () {
         if ($scope.todoName && $scope.todoPhone && $scope.todoTime) {
-            $scope.str = $scope.todoPhone.replace(/\s/g, "");
-            $scope.hasDuplicates = (/([()-]).*?\1/).test($scope.str);
-            $scope.pattern = (/^00|\+[0-9-()]{7}[0-9]*$/).test($scope.str);
-            $scope.hasLetter = (/\[a-zA-z]/).test($scope.str);
-            if (!$scope.hasDuplicates && $scope.pattern && !$scope.hasLetter) {
-                $scope.newstr = $scope.str.replace(/[ ()-]/g, "");
-                $scope.phones = $scope.newstr.replace(/^\+/, "00");
-                $scope.phoneNum = $scope.phones.replace(/([\d]{5})([\d]{3})([\d]{3})([\d]{3})/g, "$1 $2 $3 $4");
-                $scope.forms.phones.$setValidity("format", true);
-            } else {
-                $scope.forms.phones.$setValidity("format", false);
-                return;
-            }
+          
             $scope.todos.push({
                 name: $scope.todoName,
                 phone: $scope.phoneNum,
@@ -59,6 +63,7 @@ app.controller("MyController", ["$scope", "$http", "$filter", function ($scope, 
 
             localStorage.setItem("todos", JSON.stringify($scope.todos));
             $scope.cancelAdd();
+         
         }
     };
 
@@ -66,7 +71,7 @@ app.controller("MyController", ["$scope", "$http", "$filter", function ($scope, 
     $scope.currentdate = new Date();
     $scope.date = $filter("date")(new Date(), "yyyy-MM-dd");
 
-  // All / NEXT / FINISHED button
+    // All / NEXT / FINISHED button
     var oldTodos = $scope.todos;
 
     $scope.allCalls = function () {
@@ -103,25 +108,25 @@ app.controller("MyController", ["$scope", "$http", "$filter", function ($scope, 
     };
 
 
-  // Cancel add calls
+    // Cancel add calls
     $scope.cancelAdd = function () {
         $scope.todoName = "";
         $scope.todoPhone = "";
         $scope.todoTime = "";
     };
-  // Remove Call
+    // Remove Call
     $scope.removeCall = function (x) {
         $scope.todos.splice(x, 1);
         localStorage.setItem("todos", JSON.stringify($scope.todos));
     };
-  // Sort by field
+    // Sort by field
     $scope.sortKey = "-time";
     $scope.reverse = true;
 
     $scope.sort = function (keyname) {
         $scope.reverse = ($scope.keyname === keyname) ? !$scope.reverse : false;
         $scope.sortKey = keyname;
-    // $scope.reverse = !$scope.reverse;
+        // $scope.reverse = !$scope.reverse;
     };
 },
 ]);

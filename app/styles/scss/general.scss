@@ -1,0 +1,10 @@
+
+a {
+    outline: none;
+    color: black;
+    text-decoration: underline;
+    &:hover, &:focus{
+       outline: none;
+        color: black;
+    }
+}
