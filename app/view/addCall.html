@@ -1,18 +1,25 @@
-<form  class = "form-inline" role="form" name = "forms"  data-ng-submit="forms.$valid && addCalls()"> 
-	<!---->
+<form data-ng-controller="addCall"   role="form" name = "forms"  data-ng-submit="forms.$valid && addCalls()" novalidate> 
+
 	<fieldset class="scheduler-border">
 		<legend class="scheduler-border">Add call</legend>
 		
-		<input class="form-control" name="name" placeholder="Name" name="name" data-ng-model="todoName" ng-maxlength="5">
-		<div class="has-error" ng-show="forms.name.$error.maxlength">Too long! max. of 5 characters!</div>
+       <div class="form-group col-md-4" ng-class="{ 'has-error' : forms.name.$invalid && !forms.name.$pristine }">
+            <input type="text" name="name" class="form-control" data-ng-model="todoName" ng-maxlength="5">
+            <p ng-show="forms.name.$error.maxlength" class="help-block">Name is too long.</p>
+			<!--<p ng-show="forms.name.$invalid && !forms.name.$pristine" class="help-block">Your name is required.</p>-->
+        </div>
 		
-		<input class="form-control" name="phoneNum" type="text" placeholder="Phone number" data-ng-model="todoPhone" data-ng-change="validFormat()" data-ng-model-options="{updateOn: 'default blur', debounce: { 'default': 500, 'blur': 0 } }">
-		<p  class="has-error"  ng-show="forms.phoneNum.$error.format">Wrong format number.</p>
-						 
-		<input class="form-control" type="time" ng-model="todoTime" placeholder="time" min="00:00" max="24:00" />
-		<button class="btn btn-primary" type="submit" value="Submit">Add +</button>
-</fieldset>
+		<div class="form-group col-md-4" ng-class="{ 'has-error' : forms.phoneNum.$invalid && !forms.phoneNum.$pristine }">
+			<input class="form-control" name="phoneNum" type="text" placeholder="Phone number" data-ng-model="todoPhone" data-ng-change="validFormat()">
+		    <p class="help-block"  ng-show="forms.phoneNum.$error.format">Wrong format number.</p>
+		</div>
+		
+		<div class="form-group col-md-4" ng-class="{ 'has-error' : forms.time.$invalid && !forms.time.$pristine }">
+			<input class="form-control" type="time" name="time" type="text" placeholder="time" data-ng-model="todoTime" min="00:00" max="24:00">
+		    <p class="help-block"  ng-show="forms.time.$error.time">Wrong format time.</p>
+		</div>
+
+		<button class="btn btn-primary" type="submit" value="Submit">Add1 +</button>
+		
+	</fieldset>
 </form>
-
-
-<!--  -->

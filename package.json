@@ -15,7 +15,12 @@
     "gulp": "^3.9.1",
     "gulp-autoprefixer": "^3.1.0",
     "gulp-concat": "^2.6.0",
+    "gulp-connect": "^5.0.0",
+    "gulp-livereload": "^3.8.1",
+    "gulp-notify": "^2.2.0",
+    "gulp-plumber": "^1.1.0",
     "gulp-sass": "^2.3.2",
+    "gulp-server-livereload": "^1.8.2",
     "gulp-uglify": "^2.0.0",
     "gulp-watch": "^4.3.9",
     "gulp-webserver": "^0.9.1"

@@ -1,5 +1,5 @@
 var gulp = require("gulp");
-var concat = require("gulp-concat");
+// var concat = require("gulp-concat");
 var uglify = require("gulp-uglify");
 var autoprefixer = require("gulp-autoprefixer");
 var webserver = require("gulp-webserver");
@@ -11,8 +11,9 @@ gulp.task("webserver", function () {
         .pipe(webserver({
             port: 8080,
             // livereload: true,
+            // directoryListing: true,
             open: true,
-            fallback: "./build/index.html",
+            fallback: "./build/index.html"
         }));
 });
 
@@ -26,24 +27,24 @@ gulp.task("templatesDirect", function () {
         .pipe(gulp.dest("./build/view"));
 });
 
-gulp.task("buildLib", function () {
-    gulp.src(require("./dependencies.json").dependencies)
-        .pipe(concat("vendor.js"))
-        .pipe(gulp.dest("./build/js"));
-});
+// gulp.task("buildLib", function () {
+//     gulp.src(require("./dependencies.json").dependencies)
+//         .pipe(concat("vendor.js"))
+//         .pipe(gulp.dest("./build/js"))
+// });
 
-gulp.task("cssConcat", function () {
-    return gulp.src(require("./stylesheets-dependencies.json").dependencies)
-        .pipe(autoprefixer())
-        .pipe(concat("vendor.css"))
-        .pipe(gulp.dest("./build/css"));
-});
+// gulp.task("cssConcat", function () {
+//     return gulp.src(require("./stylesheets-dependencies.json").dependencies)
+//         .pipe(autoprefixer())
+//         .pipe(concat("vendor.css"))
+//         .pipe(gulp.dest("./build/css"))
+// });
 
 gulp.task("jsUglify", function () {
     return gulp.src("./app/js/**/*.js")
-        .pipe(concat("all.js"))
+        // .pipe(concat("all.js"))
         .pipe(uglify())
-        .pipe(gulp.dest("./build/js"));
+        .pipe(gulp.dest("./build/js"))
 });
 
 gulp.task("sass", function () {
@@ -53,8 +54,8 @@ gulp.task("sass", function () {
             browsers: ["last 5 versions",],
             cascade: false,
         }))
-        .pipe(concat("all.css"))
-        .pipe(gulp.dest("./build/css"));
+        // .pipe(concat("all.css"))
+        .pipe(gulp.dest("./build/css"))
 
 });
 gulp.task("watch", function () {
@@ -64,5 +65,5 @@ gulp.task("watch", function () {
     gulp.watch("./app/index.html", ["templates",]);
 });
 
-gulp.task("default", ["jsUglify", "webserver", "templates", "templatesDirect", "sass", "cssConcat", "buildLib", "watch",]);
+gulp.task("default", ["jsUglify", "webserver", "templates", "templatesDirect", "sass", "watch",]);
 

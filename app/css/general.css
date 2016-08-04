@@ -1,0 +1,8 @@
+a {
+  outline: none;
+  color: black;
+  text-decoration: underline; }
+  a:hover, a:focus {
+    outline: none;
+    color: black; }
+
