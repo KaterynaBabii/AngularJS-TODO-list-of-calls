@@ -1,11 +1,10 @@
-angular.module("myApp")
- .directive("addCall", function () {
+
+ app.directive("addCall", function () {
      return {
         restrict: "E",
         templateUrl: "../view/addCall.html",
     };
- })
-.controller("addCall", ["$scope", function ($scope) {
+ }).controller("addCall", ["$scope", function ($scope) {
     $scope.validFormat = function () {
         $scope.str = $scope.todoPhone.replace(/\s/g, "");
         $scope.hasDuplicates = (/([()-]).*?\1/).test($scope.str);
@@ -32,6 +31,13 @@ angular.module("myApp")
             $scope.todoName = "";
             $scope.todoPhone = "";
             $scope.todoTime = "";
+  
+            $scope.forms.$setUntoched();
+            $scope.forms.$setValidity();
+            $scope.forms.$setPristine();
+            $scope.forms.$submitted = false;
+            $scope.forms.$required = false;
+            $scope.forms.$error = {};
 
             localStorage.setItem("todos", JSON.stringify($scope.todos));
         }

@@ -1,69 +1,73 @@
 var gulp = require("gulp");
-// var concat = require("gulp-concat");
-var uglify = require("gulp-uglify");
+var concat = require("gulp-concat");
 var autoprefixer = require("gulp-autoprefixer");
+var plumber = require("gulp-plumber");
+// var cssmin = require('gulp-cssmin');
+var uglify = require("gulp-uglify");
 var webserver = require("gulp-webserver");
+// var livereload = require("gulp-livereload");
 var sass = require("gulp-sass");
+var refresh = require('gulp-refresh');
 
-// webserver
+
 gulp.task("webserver", function () {
     gulp.src("./build/")
         .pipe(webserver({
             port: 8080,
-            // livereload: true,
-            // directoryListing: true,
-            open: true,
-            fallback: "./build/index.html"
+            livereload: true,
+            open: false,
+            fallback: "./build/index.html",
         }));
 });
 
-gulp.task("templates", function () {
+gulp.task("views", function () {
     return gulp.src("./app/index.html")
         .pipe(gulp.dest("./build"));
 });
-
 gulp.task("templatesDirect", function () {
     return gulp.src(["./app/view/**/*.html",])
-        .pipe(gulp.dest("./build/view"));
+        .pipe(gulp.dest("./build/view"))
+        .pipe(refresh());
 });
-
-// gulp.task("buildLib", function () {
-//     gulp.src(require("./dependencies.json").dependencies)
-//         .pipe(concat("vendor.js"))
-//         .pipe(gulp.dest("./build/js"))
-// });
-
-// gulp.task("cssConcat", function () {
-//     return gulp.src(require("./stylesheets-dependencies.json").dependencies)
-//         .pipe(autoprefixer())
-//         .pipe(concat("vendor.css"))
-//         .pipe(gulp.dest("./build/css"))
-// });
+gulp.task("cssConcat", function () {
+    return gulp.src(require("./stylesheets-dependencies.json").dependencies)
+        .pipe(plumber())
+        .pipe(autoprefixer())
+        .pipe(concat("vendor.css"))
+        .pipe(gulp.dest("./build/css"));
+});
+gulp.task("buildLib", function () {
+    gulp.src(require("./dependencies.json").dependencies)
+        .pipe(concat("vendor.js"))
+        .pipe(gulp.dest("./build/js"));
+});
 
 gulp.task("jsUglify", function () {
     return gulp.src("./app/js/**/*.js")
-        // .pipe(concat("all.js"))
+        .pipe(plumber())
+        .pipe(concat("all.js"))
         .pipe(uglify())
         .pipe(gulp.dest("./build/js"))
+        .pipe(refresh());
 });
-
 gulp.task("sass", function () {
     gulp.src("./app/styles/scss/**/*.scss")
         .pipe(sass().on("error", sass.logError))
-        .pipe(autoprefixer({
-            browsers: ["last 5 versions",],
-            cascade: false,
-        }))
-        // .pipe(concat("all.css"))
+        .pipe(autoprefixer())
+        .pipe(concat("all.css"))
         .pipe(gulp.dest("./build/css"))
+        .pipe(refresh());
 
 });
 gulp.task("watch", function () {
-    gulp.watch("./app/styles/scss/**/*.scss", ["sass",]);
+    refresh.listen()
+    // livereload.listen();
+    // gulp.watch("./app/styles/**/*.css", ["cssConcat", ]);
+    gulp.watch("./app/styles/scss/**/*.scss", ["sass", ]);
     gulp.watch("./app/js/**/*.js", ["jsUglify",]);
-    gulp.watch("./app/templates/**/*.html", ["templatesDirect",]);
-    gulp.watch("./app/index.html", ["templates",]);
+    gulp.watch("./app/view/**/*.html", ["templatesDirect",]);
+    gulp.watch("./app/index.html", ["views",]);
 });
 
-gulp.task("default", ["jsUglify", "webserver", "templates", "templatesDirect", "sass", "watch",]);
+gulp.task("default", ["jsUglify", "views", "templatesDirect", "webserver", "sass", "buildLib", "cssConcat", "watch", ]);
 
