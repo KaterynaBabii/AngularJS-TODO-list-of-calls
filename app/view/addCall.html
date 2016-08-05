@@ -1,25 +1,26 @@
-<form data-ng-controller="addCall"   role="form" name = "forms"  data-ng-submit="forms.$valid && addCalls()" novalidate> 
-
+<form role="form" name="forms" data-ng-submit="addCalls(forms)" novalidate> 
+<!-- data-ng-controller="addCall"-->
 	<fieldset class="scheduler-border">
 		<legend class="scheduler-border">Add call</legend>
 		
        <div class="form-group col-md-4" ng-class="{ 'has-error' : forms.name.$invalid && !forms.name.$pristine }">
-            <input type="text" name="name" class="form-control" data-ng-model="todoName" ng-maxlength="5">
+            <input type="text" name="name" class="form-control" data-ng-model="todoName" ng-maxlength="5" required>
             <p ng-show="forms.name.$error.maxlength" class="help-block">Name is too long.</p>
-			<!--<p ng-show="forms.name.$invalid && !forms.name.$pristine" class="help-block">Your name is required.</p>-->
+			<p ng-show="forms.$submitted || forms.name.$touched" class="help-block"><span ng-show="forms.name.$error.required">Name is required.</span></p>
         </div>
 		
 		<div class="form-group col-md-4" ng-class="{ 'has-error' : forms.phoneNum.$invalid && !forms.phoneNum.$pristine }">
-			<input class="form-control" name="phoneNum" type="text" placeholder="Phone number" data-ng-model="todoPhone" data-ng-change="validFormat()">
+			<input class="form-control" name="phoneNum" type="text" placeholder="Phone number" data-ng-model="todoPhone" data-ng-change="validFormat()" required>
 		    <p class="help-block"  ng-show="forms.phoneNum.$error.format">Wrong format number.</p>
+			<p ng-show="forms.$submitted || forms.phoneNum.$touched" class="help-block"><span ng-show="forms.phoneNum.$error.required">Phone number is required.</span></p>
 		</div>
 		
 		<div class="form-group col-md-4" ng-class="{ 'has-error' : forms.time.$invalid && !forms.time.$pristine }">
-			<input class="form-control" type="time" name="time" type="text" placeholder="time" data-ng-model="todoTime" min="00:00" max="24:00">
+			<input class="form-control" type="time" name="time" type="text" placeholder="time" data-ng-model="todoTime" min="00:00" max="24:00" required>
 		    <p class="help-block"  ng-show="forms.time.$error.time">Wrong format time.</p>
+			<p ng-show="forms.$submitted || forms.time.$touched" class="help-block"><span ng-show="forms.time.$error.required">Time is required.</span></p>
 		</div>
 
-		<button class="btn btn-primary" type="submit" value="Submit">Add1 +</button>
-		
+		<button class="btn btn-primary pull-right" type="submit" value="Submit">Add01 +</button>
 	</fieldset>
 </form>
