@@ -1,4 +1,4 @@
-<form data-ng-controller="addCall" role="form" name="forms" data-ng-submit="addCalls(forms)" novalidate> 
+<form  role="form" name="forms" data-ng-submit="addCalls(forms)" novalidate> 
 	<fieldset class="scheduler-border">
 		<legend class="scheduler-border">Add call</legend>
 		
@@ -19,7 +19,6 @@
 		    <p class="help-block"  ng-show="forms.time.$error.time">Wrong format time.</p>
 			<p ng-show="forms.$submitted || forms.time.$touched" class="help-block"><span ng-show="forms.time.$error.required">Time is required.</span></p>
 		</div>
-
 		<button class="btn btn-primary pull-right" type="submit" value="Submit">Add +</button>
 	</fieldset>
 </form>

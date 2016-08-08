@@ -1,20 +1,6 @@
 
 var app = angular.module("myApp", []);
 
-
-app.directive("nextCall", function () {
-    return {
-        restrict: "E",
-        templateUrl: "view/nextCall.html",
-    };
-});
-app.directive("listCalls", function () {
-    return {
-        restrict: "E",
-        templateUrl: "view/listCalls.html",
-    };
-});
-
 app.controller("MyController", ["$scope", "$http", "$filter", function ($scope, $http, $filter) {
     $scope.saved = localStorage.getItem("todos");
     $scope.todos = (localStorage.getItem("todos") !== null) ? JSON.parse($scope.saved) : [
@@ -23,19 +9,25 @@ app.controller("MyController", ["$scope", "$http", "$filter", function ($scope, 
             phone: "00420 111 222 333",
             time: "12:20",
             done: false,
-        },];
+        },
+        {
+            name: "Item1",
+            phone: "00420 111 222 333",
+            time: "12:20",
+            done: false,
+        }];
 
     localStorage.setItem("todos", JSON.stringify($scope.todos));
+
 
     $scope.nextCallIs = false;
     $scope.currentdate = new Date();
     $scope.date = $filter("date")(new Date(), "yyyy-MM-dd");
-
-    // All / NEXT / FINISHED button
-    var oldTodos = $scope.todos;
-
+   var oldTodos = $scope.todos;
+   
+   // All / NEXT / FINISHED button
     $scope.allCalls = function () {
-        $scope.todos = oldTodos;
+        $scope.todos = oldTodos;     
     };
     $scope.disabledCall = function () {
         $scope.todos = [];
@@ -58,30 +50,11 @@ app.controller("MyController", ["$scope", "$http", "$filter", function ($scope, 
                 datetime = new Date($scope.date + "T" + getUserTime + ":00");
             if (datetime.getTime() > $scope.currentdate.getTime()) {
                 $scope.todos.push(oldTodos);
-            }
+            } 
         });
         $scope.todos = $filter("orderBy")($scope.todos, "time");
-        $scope.next1Call = $scope.todos;
-        $scope.next1Call.name = $scope.todos[0].name;
-        $scope.next1Call.phone = $scope.todos[0].phone;
-        $scope.next1Call.time = $scope.todos[0].time;
+        $scope.firstTodo = {};
+        Object.assign($scope.firstTodo, $scope.todos[0]);
     };
-
-    // Remove Call
-    $scope.removeCall = function (x) {
-        $scope.todos.splice(x, 1);
-        localStorage.setItem("todos", JSON.stringify($scope.todos));
-    };
-    // Sort by field
-    $scope.sortKey = "-time";
-    $scope.reverse = true;
-    // $scope.todos = todos;
-
-    $scope.sort = function (sortKey) {
-        $scope.reverse = ($scope.sortKey === sortKey) ? !$scope.reverse : false;
-        $scope.sortKey = sortKey;
-        // $scope.reverse = !$scope.reverse;
-    };
-},
-]);
+}]);
 
