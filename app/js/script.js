@@ -69,7 +69,7 @@
             $scope.todos = $filter('orderBy')($scope.todos, 'time');
             $scope.firstTodo = {};
             Object.assign($scope.firstTodo, $scope.todos[0]);
-            $scope.firstTodo.time =  $filter('date')($scope.firstTodo.time, 'HH:mm');
+           
         };
     }
 })();
