@@ -16,6 +16,6 @@
 
     function NextCall ($scope, $filter) {
         $scope.nextCall();
-        $scope.firstTodo.time =  $filter('date')($scope.firstTodo.time, 'HH:mm');
+      
     }
 })();

@@ -60,8 +60,6 @@
                 var oldData = new Date(oldTodos.time),
                     getUserTime = $filter('date')(oldData, 'HH:mm'),
                     datetime = new Date($scope.date + 'T' + getUserTime + ':00+0300');
-                    // console.log(getUserTime);
-                    // console.log(datetime);
                 if (datetime.getTime() > $scope.currentdate.getTime()) {
                     $scope.todos.push(oldTodos);
                 }
@@ -69,7 +67,7 @@
             $scope.todos = $filter('orderBy')($scope.todos, 'time');
             $scope.firstTodo = {};
             Object.assign($scope.firstTodo, $scope.todos[0]);
-           
+            $scope.firstTodo.time =  $filter('date')($scope.firstTodo.time, 'HH:mm');
         };
     }
 })();
