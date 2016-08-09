@@ -1,26 +1,26 @@
 
-app.directive("addCall", function () {
+app.directive('addCall', function () {
     return {
-        restrict: "E",
-        templateUrl: "../view/addCall.html",
+        restrict: 'E',
+        templateUrl: '../view/addCall.html',
         // replace: true,
         controller: addCall,
     };
 });
-addCall.$inject = ["$scope"];
-function addCall($scope) {  
+addCall.$inject = ['$scope', ];
+function addCall ($scope) {
     $scope.validFormat = function () {
-        $scope.str = $scope.todoPhone.replace(/\s/g, "");
+        $scope.str = $scope.todoPhone.replace(/\s/g, '');
         $scope.hasDuplicates = (/([()-]).*?\1/).test($scope.str);
         $scope.pattern = (/^00|\+[0-9-()]{7}[0-9]*$/).test($scope.str);
         $scope.hasLetter = (/\[a-zA-z]/).test($scope.str);
         if (!$scope.hasDuplicates && $scope.pattern && !$scope.hasLetter) {
-            $scope.newstr = $scope.str.replace(/[ ()-]/g, "");
-            $scope.phones = $scope.newstr.replace(/^\+/, "00");
-            $scope.phoneNum = $scope.phones.replace(/([\d]{5})([\d]{3})([\d]{3})([\d]{3})/g, "$1 $2 $3 $4");
-            $scope.forms.phoneNum.$setValidity("format", true);
+            $scope.newstr = $scope.str.replace(/[ ()-]/g, '');
+            $scope.phones = $scope.newstr.replace(/^\+/, '00');
+            $scope.phoneNum = $scope.phones.replace(/([\d]{5})([\d]{3})([\d]{3})([\d]{3})/g, '$1 $2 $3 $4');
+            $scope.forms.phoneNum.$setValidity('format', true);
         } else {
-            $scope.forms.phoneNum.$setValidity("format", false);
+            $scope.forms.phoneNum.$setValidity('format', false);
             return;
         }
     };
@@ -32,19 +32,16 @@ function addCall($scope) {
                 time: $scope.todoTime,
                 done: false,
             });
-            $scope.todoName = "";
-            $scope.todoPhone = "";
-            $scope.todoTime = "";
+            $scope.todoName = '';
+            $scope.todoPhone = '';
+            $scope.todoTime = '';
 
-            // $scope.forms.$setUntoched();
-            // $scope.forms.$setValidity();
-            // $scope.forms.$setPristine();
-            // $scope.forms.$submitted = false;
+            $scope.forms.$setUntouched();
+            $scope.forms.$setValidity();
+            $scope.forms.$setPristine();
+            $scope.forms.$submitted = false;
 
-            // $scope.forms.$required = false;
-            // $scope.forms.$error = {};
-
-            localStorage.setItem("todos", JSON.stringify($scope.todos));     
+            localStorage.setItem('todos', angular.toJson($scope.todos));
         }
     };
 }

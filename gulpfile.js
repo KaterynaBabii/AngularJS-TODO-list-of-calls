@@ -15,7 +15,7 @@ gulp.task("webserver", function () {
         .pipe(webserver({
             port: 8080,
             livereload: true,
-            open: false,
+            open: true,
             fallback: "./build/index.html",
         }));
 });
