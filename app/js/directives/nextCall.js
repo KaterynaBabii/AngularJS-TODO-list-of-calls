@@ -16,6 +16,5 @@
 
     function NextCall ($scope, $filter) {
         $scope.nextCall();
-      
     }
 })();

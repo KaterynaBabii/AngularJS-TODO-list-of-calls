@@ -3,7 +3,7 @@
 		<legend class="scheduler-border">Add call</legend>
 		
        <div class="form-group col-md-4" ng-class="{ 'has-error' : forms.name.$invalid && !forms.name.$pristine }">
-            <input type="text" name="name" class="form-control" data-ng-model="todoName" ng-maxlength="5" required>
+            <input type="text" name="name" class="form-control" data-ng-model="todoName" ng-maxlength="30" required>
             <p ng-show="forms.name.$error.maxlength" class="help-block">Name is too long.</p>
 			<p ng-show="forms.$submitted || forms.name.$touched" class="help-block"><span ng-show="forms.name.$error.required">Name is required.</span></p>
         </div>
