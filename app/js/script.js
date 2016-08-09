@@ -46,7 +46,7 @@
             angular.forEach(oldTodos, function (oldTodos, todo) {
                 var oldData = new Date(oldTodos.time); // Date {Thu Jan 01 1970 11:05:00 GMT+0200 (FLE Daylight Time)}
                 var getUserTime = $filter('date')(oldData, 'HH:mm'); // 02:15
-                var datetime = new Date($scope.date + 'T' + getUserTime + ':00'); // user's call full date
+                var datetime = new Date($scope.date + 'T' + getUserTime + ':00+0300'); // user's call full date
                 if (datetime.getTime() < $scope.currentdate.getTime()) {
                     oldTodos.done = true;
                     $scope.todos.push(oldTodos);
@@ -59,7 +59,9 @@
             angular.forEach(oldTodos, function (oldTodos, todo) {
                 var oldData = new Date(oldTodos.time),
                     getUserTime = $filter('date')(oldData, 'HH:mm'),
-                    datetime = new Date($scope.date + 'T' + getUserTime + ':00');
+                    datetime = new Date($scope.date + 'T' + getUserTime + ':00+0300');
+                    // console.log(getUserTime);
+                    // console.log(datetime);
                 if (datetime.getTime() > $scope.currentdate.getTime()) {
                     $scope.todos.push(oldTodos);
                 }
