@@ -1,4 +1,4 @@
-(function() {
+(function () {
     'use strict';
     angular
         .module('myApp')
@@ -7,7 +7,7 @@
     function nextCalls () {
         var directive = {
             restrict: 'E',
-            templateUrl: '../view/nextCall.html',
+            templateUrl: '../shared/nextCall/nextCall.html',
             controller: NextCall,
         };
         return directive;
@@ -15,6 +15,6 @@
     NextCall.$inject = ['$scope','$filter'];
 
     function NextCall ($scope, $filter) {
-        $scope.nextCall();
+        // $scope.nextCall();
     }
 })();

@@ -1,4 +1,4 @@
-(function() {
+(function () {
     'use strict';
     angular
         .module('myApp')
@@ -7,7 +7,7 @@
     function addCall () {
         var directive = {
             restrict: 'E',
-            templateUrl: '../view/addCall.html',
+            templateUrl: '../shared/addCall/addCall.html',
             controller: AddCal,
         };
         return directive;
@@ -15,7 +15,9 @@
     AddCal.$inject = ['$scope'];
     function AddCal ($scope) {
         $scope.validFormat = function () {
-            $scope.str = $scope.todoPhone.replace(/\s/g, '');
+            if ($scope.todoPhone) {
+                $scope.str = $scope.todoPhone.replace(/\s/g, '');
+            }
             $scope.hasDuplicates = (/([()-]).*?\1/).test($scope.str);
             $scope.pattern = (/^00|\+[0-9-()]{7}[0-9]*$/).test($scope.str);
             $scope.hasLetter = (/\[a-zA-z]/).test($scope.str);
@@ -48,7 +50,7 @@
 
                 localStorage.setItem('todos', angular.toJson($scope.todos));
             }
-            $scope.nextCall();
+            // $scope.nextCall();
         };
     }
 })();

@@ -8,17 +8,18 @@
 			<p ng-show="forms.$submitted || forms.name.$touched" class="help-block"><span ng-show="forms.name.$error.required">Name is required.</span></p>
         </div>
 		
-		<div class="form-group col-md-4" ng-class="{ 'has-error' : forms.phoneNum.$invalid && !forms.phoneNum.$pristine }">
+		<div class="form-group col-md-4" ng-class="{ 'has-error' : forms.phoneNum.$invalid && !forms.phoneNum.$pristine}">
 			<input class="form-control" name="phoneNum" type="text" placeholder="Phone number" data-ng-model="todoPhone" data-ng-change="validFormat()" required>
-		    <p class="help-block"  ng-show="forms.phoneNum.$error.format">Wrong format number.</p>
+		    <p class="help-block"  ng-show="forms.phoneNum.$error.format && !forms.phoneNum.$error.required">Wrong format number.</p>
 			<p ng-show="forms.$submitted || forms.phoneNum.$touched" class="help-block"><span ng-show="forms.phoneNum.$error.required">Phone number is required.</span></p>
 		</div>
 		
 		<div class="form-group col-md-4" ng-class="{ 'has-error' : forms.time.$invalid && !forms.time.$pristine }">
-			<input class="form-control" type="time" name="time" type="text" placeholder="time" data-ng-model="todoTime" min="00:00" max="24:00" required>
+			<input class="form-control" name="time" type="time" placeholder="time" data-ng-model="todoTime" min="00:00" max="24:00" data-date-format="HH:mm" required>
 		    <p class="help-block"  ng-show="forms.time.$error.time">Wrong format time.</p>
 			<p ng-show="forms.$submitted || forms.time.$touched" class="help-block"><span ng-show="forms.time.$error.required">Time is required.</span></p>
 		</div>
 		<button class="btn btn-primary pull-right" type="submit" value="Submit">Add +</button>
 	</fieldset>
 </form>
+

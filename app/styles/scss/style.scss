@@ -25,10 +25,16 @@ form {
     } 
 }
 table {
-  .sortorder:after {
-    content: '\25b2';   // BLACK UP-POINTING TRIANGLE
-  }
-  .sortorder.reverse:after {
-    content: '\25bc';   // BLACK DOWN-POINTING TRIANGLE
+    tr th:nth-child(3) {
+        width:20%;
+    }
+   .sortorder {
+        float:right;
+        &:after {
+            content: '\25b2';   // BLACK UP-POINTING TRIANGLE
+        }
+        &.reverse:after {
+            content: '\25bc';   // BLACK DOWN-POINTING TRIANGLE
+        }
   }
 }
