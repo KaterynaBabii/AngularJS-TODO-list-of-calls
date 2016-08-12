@@ -30,7 +30,11 @@
             },];
 
         localStorage.setItem('todos', angular.toJson($scope.todos));
+        $scope.readList = function () {
+            $scope.list = localStorage.getItem('todos');
+        }
 
+        $scope.readList();
         var oldTodos = $scope.todos;
 
         $scope.nextCallIs = false;
@@ -39,9 +43,11 @@
 
     // All / NEXT / FINISHED button
         $scope.allCalls = function () {
+            $scope.readList();
             $scope.todos = oldTodos;
         };
         $scope.disabledCall = function () {
+            $scope.readList();
             $scope.todos = [];
             angular.forEach(oldTodos, function (oldTodos, todo) {
                 var oldData = new Date(oldTodos.time); // Date {Thu Jan 01 1970 11:05:00 GMT+0200 (FLE Daylight Time)}
@@ -55,6 +61,7 @@
             });
         };
         $scope.nextCall = function () {
+            $scope.readList();
             $scope.todos = [];
             angular.forEach(oldTodos, function (oldTodos, todo) {
                 var oldData = new Date(oldTodos.time),
