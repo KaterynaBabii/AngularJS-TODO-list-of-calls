@@ -1,4 +1,4 @@
-(function() {
+(function () {
     'use strict';
     angular
         .module('myApp', [])
@@ -6,7 +6,7 @@
 
     MyController.$inject = ['$scope', '$http', '$filter'];
 
-    function MyController($scope, $http, $filter) { 
+    function MyController($scope, $http, $filter) {
 
         $scope.saved = localStorage.getItem('todos');
         $scope.todos = (localStorage.getItem('todos') !== null) ? angular.fromJson($scope.saved) : [
@@ -33,7 +33,6 @@
         $scope.readList = function () {
             $scope.list = localStorage.getItem('todos');
         }
-
         $scope.readList();
         var oldTodos = $scope.todos;
 
@@ -41,13 +40,11 @@
         $scope.currentdate = new Date();
         $scope.date = $filter('date')(new Date(), 'yyyy-MM-dd');
 
-    // All / NEXT / FINISHED button
+        // All / NEXT / FINISHED button
         $scope.allCalls = function () {
-            $scope.readList();
             $scope.todos = oldTodos;
         };
         $scope.disabledCall = function () {
-            $scope.readList();
             $scope.todos = [];
             angular.forEach(oldTodos, function (oldTodos, todo) {
                 var oldData = new Date(oldTodos.time); // Date {Thu Jan 01 1970 11:05:00 GMT+0200 (FLE Daylight Time)}
@@ -61,7 +58,6 @@
             });
         };
         $scope.nextCall = function () {
-            $scope.readList();
             $scope.todos = [];
             angular.forEach(oldTodos, function (oldTodos, todo) {
                 var oldData = new Date(oldTodos.time),
@@ -70,11 +66,11 @@
                 if (datetime.getTime() > $scope.currentdate.getTime()) {
                     $scope.todos.push(oldTodos);
                 }
+                $scope.todos = $filter('orderBy')($scope.todos, 'time');
+                $scope.firstTodo = {};
+                Object.assign($scope.firstTodo, $scope.todos[0]);
+                $scope.firstTodo.time = $filter('date')($scope.firstTodo.time, 'HH:mm');
             });
-            $scope.todos = $filter('orderBy')($scope.todos, 'time');
-            $scope.firstTodo = {};
-            Object.assign($scope.firstTodo, $scope.todos[0]);
-            $scope.firstTodo.time =  $filter('date')($scope.firstTodo.time, 'HH:mm');
         };
     }
 })();

@@ -49,8 +49,9 @@
                 $scope.forms.$submitted = false;
 
                 localStorage.setItem('todos', angular.toJson($scope.todos));
+                
+                console.log($scope.todos);
             }
-            $scope.readList();
             $scope.nextCall();     
         };
     }
