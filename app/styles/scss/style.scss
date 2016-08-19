@@ -22,7 +22,10 @@ form {
         width:auto;
         padding:0 10px;
         border-bottom:none;
-    } 
+    }
+    .btn-info {
+       display:none;
+    }
 }
 table {
     tr th:first-child {

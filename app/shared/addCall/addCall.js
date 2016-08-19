@@ -36,12 +36,12 @@
                 $scope.todos.push({
                     name: $scope.todoName,
                     phone: $scope.phoneNum,
-                    time: new Date($scope.todoTime),
+                    time: $scope.todoTime,
                     done: false,
                 });
                 $scope.todoName = '';
                 $scope.todoPhone = '';
-                $scope.todoTime = null;
+                $scope.todoTime = '';
 
                 $scope.forms.$setUntouched();
                 $scope.forms.$setValidity();
