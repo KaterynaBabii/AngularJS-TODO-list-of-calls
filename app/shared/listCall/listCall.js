@@ -14,7 +14,7 @@
     }
     ListCall.$inject = ['$filter', '$scope'];
     function ListCall ($filter, $scope) {
-        $scope.readList();
+        // $scope.readList();
         $scope.sortKey = '-time';
         $scope.reverse = true;
             // Remove Call

@@ -15,7 +15,6 @@
     NextCall.$inject = ['$scope','$filter'];
 
     function NextCall ($scope, $filter) {
-        $scope.nextCall();
- 
+        // $scope.nextCall();
     }
 })();

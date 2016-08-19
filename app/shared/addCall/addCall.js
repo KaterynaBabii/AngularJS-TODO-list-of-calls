@@ -36,12 +36,12 @@
                 $scope.todos.push({
                     name: $scope.todoName,
                     phone: $scope.phoneNum,
-                    time: $scope.todoTime,
+                    time: new Date($scope.todoTime),
                     done: false,
                 });
                 $scope.todoName = '';
                 $scope.todoPhone = '';
-                $scope.todoTime = '';
+                $scope.todoTime = null;
 
                 $scope.forms.$setUntouched();
                 $scope.forms.$setValidity();
@@ -52,7 +52,7 @@
                 
                 console.log($scope.todos);
             }
-            $scope.nextCall();     
+            // $scope.nextCall();     
         };
     }
 })();
