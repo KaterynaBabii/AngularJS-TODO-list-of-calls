@@ -4,7 +4,7 @@
         .module('myApp')
         .directive('nextCalls', nextCalls);
 
-    function nextCalls () {
+    function nextCalls() {
         var directive = {
             restrict: 'E',
             templateUrl: '../shared/nextCall/nextCall.html',
@@ -12,9 +12,9 @@
         };
         return directive;
     }
-    NextCall.$inject = ['$scope','$filter'];
+    NextCall.$inject = ['$scope', '$filter'];
 
     function NextCall ($scope, $filter) {
-        // $scope.nextCall();
+        $scope.nextCallIs();
     }
 })();

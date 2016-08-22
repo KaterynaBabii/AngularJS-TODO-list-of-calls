@@ -4,7 +4,7 @@
         .module('myApp')
         .directive('addCall', addCall);
 
-    function addCall () {
+    function addCall() {
         var directive = {
             restrict: 'E',
             templateUrl: '../shared/addCall/addCall.html',
@@ -13,7 +13,7 @@
         return directive;
     }
     AddCal.$inject = ['$scope'];
-    function AddCal ($scope) {
+    function AddCal($scope) {
         $scope.validFormat = function () {
             if ($scope.todoPhone) {
                 $scope.str = $scope.todoPhone.replace(/\s/g, '');
@@ -31,12 +31,24 @@
                 return;
             }
         };
+        // timePicker params
+        $scope.todoTime = '';
+        $scope.timePickerIsOpen = false;
+        $scope.timePattern = '([01]\\d|2[0-3]):?([0-5]\\d)';
+        $scope.timeOptions = {
+            readonlyInput: false,
+            showMeridian: false
+        };
+        $scope.openCalendar = function () {
+            $scope.timePickerIsOpen = true;
+        };
+        //end timePicker params
         $scope.addCalls = function () {
             if ($scope.todoName && $scope.todoPhone && $scope.todoTime) {
                 $scope.todos.push({
                     name: $scope.todoName,
                     phone: $scope.phoneNum,
-                    time: $scope.todoTime,
+                    time: $scope.todoTime.getTime(),
                     done: false,
                 });
                 $scope.todoName = '';
@@ -49,10 +61,8 @@
                 $scope.forms.$submitted = false;
 
                 localStorage.setItem('todos', angular.toJson($scope.todos));
-                
-                console.log($scope.todos);
             }
-            // $scope.nextCall();     
+            $scope.nextCallIs();
         };
     }
 })();
