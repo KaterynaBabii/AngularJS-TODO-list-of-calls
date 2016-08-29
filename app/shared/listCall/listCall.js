@@ -21,6 +21,8 @@
             localStorage.setItem('todos', angular.toJson($scope.todos));
         };
 
+        $scope.show = 'All';
+
         $scope.allCalls = function () {
             $scope.todos = oldTodos;
         };
@@ -54,7 +56,7 @@
             $scope.reverse = ($scope.sortKey === sortKey) ? !$scope.reverse : false;
             $scope.sortKey = sortKey;
         };
-
+       
         //Show Next Finished and All calls
         $scope.showFn = function (todo) {
             $scope.allCalls();
@@ -70,8 +72,6 @@
                 return false;
             }
         };
-        // $scope.showFn = true;
-
     }
 })();
 

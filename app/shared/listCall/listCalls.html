@@ -13,7 +13,7 @@
         </tr>
     </thead>
     <tbody>
-        <tr data-ng-repeat="todo in todos | orderBy:sortKey:reverse | filter:showFn track by $index" ng-class="{'active' : show == 'All' }" ng-show="show='All'">
+        <tr data-ng-repeat="todo in todos | orderBy:sortKey:reverse | filter:showFn track by $index">
         <td class="done-{{ todo.done }}">{{ todo.name }}</td> 
         <td>{{todo.phone}}</td>
         <td>{{todo.time | date:'HH:mm'}}</td>
