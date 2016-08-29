@@ -13,7 +13,7 @@
         </tr>
     </thead>
     <tbody>
-        <tr data-ng-repeat="todo in todos | orderBy:sortKey:reverse track by $index ">
+        <tr data-ng-repeat="todo in todos | orderBy:sortKey:reverse | filter:showFn track by $index" ng-class="{'active' : show == 'All' }" ng-show="show='All'">
         <td class="done-{{ todo.done }}">{{ todo.name }}</td> 
         <td>{{todo.phone}}</td>
         <td>{{todo.time | date:'HH:mm'}}</td>
@@ -22,7 +22,8 @@
         </tr>
     </tbody> 
 </table>
-
-<button class="btn btn-primary" data-ng-click="allCalls()">All</button>
-<button class="btn btn-primary" data-ng-click="nextCall()">Next</button>
-<button class="btn btn-primary" data-ng-click="disabledCall()">Finished</button>
+<div>
+    <button class="btn btn-primary" ng-class="{'active' : show == 'All' }" ng-click="show='All'">All</button>
+    <button class="btn btn-primary" ng-class="{'active' : show == 'next' }" ng-click="show='next'">Next</button>
+    <button class="btn btn-primary" ng-class="{'active' : show == 'finished' }" ng-click="show='finished'">Finished</button>
+</div>

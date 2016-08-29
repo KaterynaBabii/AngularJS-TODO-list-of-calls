@@ -62,6 +62,7 @@
 
                 localStorage.setItem('todos', angular.toJson($scope.todos));
             }
+            $scope.allCalls();
             $scope.nextCallIs();
         };
     }
